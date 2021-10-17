@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Amicable Numbers</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <style>
+    body {
+      background-image: url("nums.jpg");
+    }
+    h1,
+    .result {
+      color: #000;
+      font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+        "Lucida Sans", Arial, sans-serif;
+      text-align: center;
+      background-color: white;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 25px;
+    }
+    .align {
+      display: inline-block;
+      text-align: left;
+    }
+  </style>
+  <body>
+    <h1>Amicable Numbers</h1>
+    <div class="result">
+      <div class="align">
+        <form id="amicable">
+          First number <input type="number" id="num1" />
+          <br />
+          Second number <input type="number" id="num2" />
+          <br />
+          <input type="button" value="Enter" onclick="isAmicable()" />
+          <p id="message"></p>
+        </form>
+        <script language="javascript">
+          let arr1 = [];
+          let arr2 = [];
+          let sum1 = 0;
+          let sum2 = 0;
+          let amicable = false;
+          function isAFactor(x, y) {
+            if (y % x == 0) return true;
+          }
+          function findFactors(num, arr) {
+            for (n = 1; n < num; n++) {
+              if (isAFactor(n, num)) {
+                arr.push(n);
+              }
+            }
+          }
+          function showFactors(arr) {
+            let factors = "";
+            for (n = 0; n < arr.length; n++) {
+              factors = factors + arr[n] + " ";
+            }
+            alert(factors);
+          }
+          function sumFactors(arr, sum) {
+            for (n = 0; n < arr.length; n++) {
+              sum = sum + arr[n];
+            }
+            return sum;
+          }
+          function reset() {
+            arr1 = [];
+            arr2 = [];
+            sum1 = 0;
+            sum2 = 0;
+            amicable = false;
+            document.getElementById("amicable").reset();
+          }
+          function isAmicable() {
+            var first = parseInt(document.getElementById("num1").value);
+            var second = parseInt(document.getElementById("num2").value);
+            findFactors(first, arr1);
+            findFactors(second, arr2);
+            showFactors(arr1);
+            showFactors(arr2);
+            sum1 = sumFactors(arr1, sum1);
+            sum2 = sumFactors(arr2, sum2);
+            if (sum1 == second && sum2 == first) {
+              amicable = true;
+            }
+            if (amicable) {
+              document.getElementById("message").innerHTML =
+                "The numbers: " + first + " and " + second + " are amicable";
+            } else {
+              document.getElementById("message").innerHTML =
+                "The numbers: " +
+                first +
+                " and " +
+                second +
+                " are not amicable";
+            }
+            reset();
+          }
+        </script>
+      </div>
+    </div>
+  </body>
+</html>
